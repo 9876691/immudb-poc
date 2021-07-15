@@ -1,0 +1,12 @@
+{
+	"name": "ImmuDB PoC",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "development",
+    "workspaceFolder": "/vscode",
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+	],
+
+	"remoteUser": "vscode"
+}

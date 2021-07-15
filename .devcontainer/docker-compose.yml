@@ -1,0 +1,33 @@
+version: '3.4'
+services:
+
+  immudb:
+    image: codenotary/immudb:latest
+    ports:
+      - "3322:3322"
+      - "8080:8080"
+    environment:
+      IMMUDB_PGSQL_SERVER: 'true'
+
+  development:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    
+    volumes:
+      - ..:/vscode:cached
+      # Give access to ssh keys on the host (Is there a better way to do this?)
+      - ~/.ssh:/home/host-ssh:cached
+      # We need this so docker in docker works (Check this)
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    environment:
+      DATABASE_URL: postgresql://immudb:immudb@immudb:5432
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    working_dir: /vscode
+    
+    depends_on:
+      - immudb
