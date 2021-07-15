@@ -6,6 +6,7 @@ services:
     ports:
       - "3322:3322" # The immutable database
       - "8080:8080" # The database admin web front end
+      - "5432:5432" # The posrtgres compatible interface
     environment:
       IMMUDB_PGSQL_SERVER: 'true'
 
@@ -23,6 +24,7 @@ services:
 
     environment:
       DATABASE_URL: postgresql://immudb:immudb@immudb:5432/defaultdb?sslmode=disable
+      MIGRATIONS_DATABASE_URL: postgresql://immudb:immudb@localhost:5432/defaultdb?sslmode=disable
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
