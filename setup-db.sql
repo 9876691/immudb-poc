@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS external_catalogue_tles(
+    id INTEGER,
+    name VARCHAR,
+    norad_id INTEGER,
+    classification VARCHAR,
+    cospar_id VARCHAR,
+    time TIMESTAMP,
+    first_time_derivative_mean_motion_over_2 INTEGER,
+    second_time_derivative_mean_motion_over_6 INTEGER,
+    bstar INTEGER,
+    elset_number integer,
+    checksum_1 INTEGER,
+    inclination INTEGER,
+    raan INTEGER,
+    ecc INTEGER,
+    argp INTEGER,
+    mean_anomaly INTEGER,
+    mean_motion INTEGER,
+    rev_number INTEGER,
+    checksum_2 INTEGER,
+    tle_lines VARCHAR, 
+    PRIMARY KEY id
+);
