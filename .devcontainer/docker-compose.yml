@@ -4,8 +4,8 @@ services:
   immudb:
     image: codenotary/immudb:latest
     ports:
-      - "3322:3322"
-      - "8080:8080"
+      - "3322:3322" # The immutable database
+      - "8080:8080" # The database admin web front end
     environment:
       IMMUDB_PGSQL_SERVER: 'true'
 
@@ -22,7 +22,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
     environment:
-      DATABASE_URL: postgresql://immudb:immudb@immudb:5432
+      DATABASE_URL: postgresql://immudb:immudb@immudb:5432/defaultdb?sslmode=disable
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
