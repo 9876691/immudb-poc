@@ -21,3 +21,6 @@ RUN echo "alias gst='git status'"  >> ~/.bashrc \
 
 # Looks like migration is not compatible with immudb (Find another one)
 RUN echo "alias migration='docker run --network host -v \$HPWD/migrations:/usr/src/migrations -it --rm -e DATABASE_URL=\$MIGRATIONS_DATABASE_URL ianpurton/rust-diesel diesel migration'" >> ~/.bashrc
+
+# Code Notary VCN
+RUN curl http://getvcn.codenotary.io -L | sh
