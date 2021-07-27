@@ -1,0 +1,48 @@
+# defence in depth see 
+# https://fruty.io/2021/02/15/how-to-restrict-outbound-traffic-on-a-docker-infrastructure/
+version: '3.4'
+services:
+
+  # Development has no access to the internet. Only via proxies.
+  development:
+    networks:
+      #- internet
+      - docker-internal
+    links:
+      - firewall-proxy:google.com
+      - firewall-proxy:youtube.com
+
+  whoami:
+    networks:
+      - docker-internal
+      - internet
+
+  ## Egress proxies
+  #nginx-proxy:
+  #  networks:
+  #    - docker-internal
+  #    - internet
+  #  image: nginx:stable-alpine
+  #  environment:
+  #    DOMAIN_TO_PROXY: google.com
+  #    NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx
+  #  volumes:
+  #    - ./nginx-proxy.conf:/etc/nginx/templates/nginx.conf.template
+  #    - ./ssl-conf:/etc/nginx/ssl-conf
+
+  firewall-proxy:
+    image: envoyproxy/envoy:v1.19.0
+    networks:
+      - docker-internal
+      - internet
+    ports:
+      - "9901:9901"
+    volumes:
+          - ./envoy.yaml:/etc/envoy/envoy.yaml
+          - ./example-com.crt:/etc/example-com.crt
+          - ./example-com.key:/etc/example-com.key
+
+networks:
+    internet: {}
+    docker-internal:
+      internal: true

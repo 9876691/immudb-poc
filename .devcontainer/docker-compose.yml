@@ -10,6 +10,13 @@ services:
     environment:
       IMMUDB_PGSQL_SERVER: 'true'
 
+  # As an example we'll add login/registration to 
+  # https://hub.docker.com/r/containous/whoami
+  whoami:
+    image: containous/whoami
+    ports:
+      - "32769:80"
+
   development:
     build: 
       context: .

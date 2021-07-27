@@ -1,14 +1,11 @@
 {
 	"name": "ImmuDB PoC",
-	"dockerComposeFile": "docker-compose.yml",
+	"dockerComposeFile": [
+		"docker-compose.yml",
+		"docker-compose.hardening.yml"
+	],
 	"service": "development",
     "workspaceFolder": "/vscode",
-	"remoteEnv": { "HPWD": "${localWorkspaceFolder}" }
-	
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-	],
-
+	"remoteEnv": { "HPWD": "${localWorkspaceFolder}" },
 	"remoteUser": "vscode"
 }
