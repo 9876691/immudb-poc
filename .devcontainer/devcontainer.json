@@ -2,7 +2,7 @@
 	"name": "ImmuDB PoC",
 	"dockerComposeFile": [
 		"docker-compose.yml",
-		"docker-compose.hardening.yml"
+		//"docker-compose.hardening.yml"
 	],
 	"service": "development",
     "workspaceFolder": "/vscode",
